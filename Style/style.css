@@ -1,3 +1,8 @@
+@font-face {
+	font-family: pokemon;
+	src: url(/Fonts/Pokemon\ Solid.ttf)
+}
+
 body {
 	margin: 0;
 }
@@ -8,9 +13,59 @@ body {
 
 header {
 	background-color: #373737;
-	color: #444AD2;
+	text-align: center;
+	padding-top: 1em;
 }
 
 footer {
 	background-color: #373737;
+}
+
+h1 {
+	font-family: 'pokemon';
+	color: #FFF504;
+	-webkit-text-stroke: 1.5px  #444AD2;
+	
+}
+
+#pokemon-btn {
+	background-color: #FF0202;
+	border-radius: 10px 0px 0px 10px;
+}
+
+#pokemon-btn:hover {
+	background-color: #444AD2;
+}
+
+#team-btn {
+	background-color: #444AD2;
+	border-radius: 0px 10px 10px 0px;
+}
+
+#team-btn:hover {
+	background-color: #FF0202;
+}
+
+button {
+	color: white;
+	padding: 0.5em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+input {
+	margin-bottom: 1em;
+	padding: 8px;
+	border-radius: 10px;
+	background-color: #03809B;
+}
+
+input::placeholder {
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+
+footer {
+	margin: 2em;
 }
