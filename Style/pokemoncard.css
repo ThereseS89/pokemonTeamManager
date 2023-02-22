@@ -1,0 +1,30 @@
+.pokemon-card-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 2em;
+	
+	flex-flow: wrap;
+}
+
+.pokemon-card {
+	background-color: #d9d9d9;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: fit-content;
+	padding: 1em 3em 1em 3em;
+	border-radius: 10px;
+	margin: 2em;
+
+}
+
+h2 {
+	color: #444AD2;
+	text-transform: uppercase;
+	text-align: center;
+	margin-top: 1em;
+	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
