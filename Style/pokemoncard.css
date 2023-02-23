@@ -1,14 +1,18 @@
 .invisible {
 	visibility: hidden;
+	z-index: -1;
 }
 
-.pokemon-card-container {
+.your-team-container {
+	z-index: 1;
+}
+
+.pokemon-card-container, .your-team-container  {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	margin-top: 2em;
-	
 	flex-flow: wrap;
 }
 
@@ -30,5 +34,11 @@ h2 {
 	text-align: center;
 	margin-top: 1em;
 	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.head-pokemon-team {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: white;
+	text-align: center;
 }
 
