@@ -1,5 +1,5 @@
 	
-	
+	const main = document.querySelector('main')
 	const pokemonButton = document.querySelector('#pokemon-btn') 
 	const teamButton = document.querySelector('#team-btn')
 	const input = document.querySelector('#pokemon-search')
@@ -42,7 +42,8 @@
 		// Här behöver jag skapa en eventlyssnare på knappen "rekrytera till team", Den behöver spara pokémon-kortet i en array som jag sedan kan visa i "Team-vyn" 
 
 			pokemonCardContent.pokemonRecruitButton.addEventListener('click', () => {
-					console.log('Du la till en pokemon i din lista');
+				console.log('Du la till en pokemon i din lista');
+
 					recruitedPokemon.push ({
 						name: pokemonData.results[i].name,
 						image: pokemonImageData.sprites.front_default
@@ -78,32 +79,99 @@
 
 
 	teamButton.addEventListener('click', () => {
+		
 		console.log(recruitedPokemon);
-		pokemonCardContainer.parentNode.replaceChild(yourTeamContainer, pokemonCardContainer)
+			pokemonCardContainer.parentNode.replaceChild(yourTeamContainer, pokemonCardContainer)
+			
+		let recruitMorePokemonContainer = document.createElement('div')
+		let recruitMorePokemonText = document.createElement('p')
 
-		recruitedPokemon.forEach(recruitedPokemon => {
-		let pokemonCardContentTeamMember = {
-			pokemonCard: document.createElement('div'),
-			pokemonName: document.createElement('h2'),
-			pokemonImage: document.createElement('img'),
-			pokemonRemoveButton: document.createElement('button')
-		} 
-		
-			pokemonCardContentTeamMember.pokemonCard.className = 'pokemon-card'
-			pokemonCardContentTeamMember.pokemonName.className = 'pokemon-head'
-			pokemonCardContentTeamMember.pokemonRemoveButton.className = 'pokemon-remove-btn'
-			pokemonCardContentTeamMember.pokemonImage.className = 'pokemon-img'
-			pokemonCardContentTeamMember.pokemonRemoveButton.innerText = 'Ta bort från ditt team'
+		if (recruitedPokemon.length < 3) {
+			recruitMorePokemonContainer.className = 'recruit-more-pokemon-container'
+			main.append(recruitMorePokemonContainer)
+			recruitMorePokemonText.className = 'recruit-more-pokemon'
+			recruitMorePokemonText.innerText = 'Du behöver ha minst tre pokémons i ditt team, rekrytera fler!'
+			recruitMorePokemonContainer.append(recruitMorePokemonText)
 
-			pokemonCardContentTeamMember.pokemonName.innerText = recruitedPokemon.name;
-			pokemonCardContentTeamMember.pokemonImage.src = recruitedPokemon.image;
+		} else  {	
+			let recruitMorePokemonContainers = document.querySelectorAll('.recruit-more-pokemon-container')
+        	recruitMorePokemonContainers.forEach(container => container.remove())
+			
+			// Loopar igenom arrayen och skapar pokemon-kort för varje element.
+
+			recruitedPokemon.forEach(recruitedPokemon => {
 		
+				let pokemonCardContentTeamMember = {
+					pokemonCard: document.createElement('div'),
+					pokemonName: document.createElement('h2'),
+					pokemonImage: document.createElement('img'),
+					pokemonYourName: document.createElement('h3'),
+					pokemonInputName: document.createElement('input'),
+					pokemonOutputName: document.createElement('p'),
+					pokemonRemoveButton: document.createElement('button')
+				} 
+
+				let pokemonOutputName = pokemonCardContentTeamMember.pokemonInputName.value
+
+				// Klassnamn:
+				pokemonCardContentTeamMember.pokemonCard.className = 'pokemon-card'
+				pokemonCardContentTeamMember.pokemonName.className = 'pokemon-head'
+				pokemonCardContentTeamMember.pokemonRemoveButton.className = 'pokemon-remove-btn'
+				pokemonCardContentTeamMember.pokemonImage.className = 'pokemon-img'
+				pokemonCardContentTeamMember.pokemonYourName.className = 'your-pokemon-name'
+				pokemonCardContentTeamMember.pokemonInputName.className = 'pokemon-input-name'
+				pokemonCardContentTeamMember.pokemonOutputName.className = 'pokemon-output-name'
+
+
+			// Innehåll:
+				pokemonCardContentTeamMember.pokemonRemoveButton.innerText = 'Ta bort från ditt team'
+				pokemonCardContentTeamMember.pokemonName.innerText = recruitedPokemon.name;
+				pokemonCardContentTeamMember.pokemonImage.src = recruitedPokemon.image;
+				pokemonCardContentTeamMember.pokemonYourName.innerText = 'Välj ett namn till din pokémon: '
+			
+			
+				pokemonCardContentTeamMember.pokemonInputName.addEventListener('keydown', function (event) {
+					
+					if (event.key === "Enter") {
+						console.log('Du tryckte på Enter');
+						console.log(pokemonOutputName);
+						pokemonOutputName = this.value
+						pokemonCardContentTeamMember.pokemonOutputName.innerText = pokemonOutputName
+
+						pokemonCardContentTeamMember.pokemonCard.insertBefore(pokemonCardContentTeamMember.pokemonOutputName, pokemonCardContentTeamMember.pokemonImage);
+
+						pokemonCardContentTeamMember.pokemonInputName.remove()
+						pokemonCardContentTeamMember.pokemonYourName.remove()
+						
+					}
+				})
+					
+
+			// Lägga till i DOM:
+			pokemonCardContentTeamMember.pokemonCard.append(pokemonCardContentTeamMember.pokemonYourName)
+			pokemonCardContentTeamMember.pokemonCard.append(pokemonCardContentTeamMember.pokemonInputName)
 			pokemonCardContentTeamMember.pokemonCard.append(pokemonCardContentTeamMember.pokemonName)
+			
 			pokemonCardContentTeamMember.pokemonCard.append(pokemonCardContentTeamMember.pokemonImage)
 			pokemonCardContentTeamMember.pokemonCard.append(pokemonCardContentTeamMember.pokemonRemoveButton)
-			
-		
 			yourTeamContainer.append(pokemonCardContentTeamMember.pokemonCard)
-		})
-	})
+	
+
+			pokemonCardContentTeamMember.pokemonRemoveButton.addEventListener('click', () => {
+				console.log('Kicka från team');
+				
+
+			})
+
+			})
+		}
+			
+	})	
+
+		// 1. Jag behöver veta vilken knapp som är i vilket card så att den vet vilket element i arrayen som den ska ta bort.
+		// 2. Sen behöver den välja ut den och ta bort den
+		// 3. Se behöver texten att man har för få pokemons i laget komma upp
+
+
+	
 	

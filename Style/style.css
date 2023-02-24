@@ -15,7 +15,6 @@ main {
 	height: 50vh;
 }
 
-
 * {
 	margin: 0;
 }
@@ -24,10 +23,9 @@ header {
 	background-color: #373737;
 	text-align: center;
 	padding-top: 1em;
-	height: 15vh;
+	height: 20vh;
 	padding-bottom: 0.5em;
 }
-
 
 header h1 {
 	font-family: 'pokemon';
@@ -53,6 +51,26 @@ header h1 {
 #team-btn:hover {
 	background-color: #FF0202;
 }
+
+#team-btn:active {
+	background-color: #4CAF50;
+
+  }
+
+#team-btn:focus {
+	background-color: #4CAF50;
+
+  }
+
+#pokemon-btn:active {
+	background-color: #4CAF50;
+
+  }
+
+#pokemon-btn:focus {
+	background-color: #4CAF50;
+
+  }
 
 button {
 	color: white;
