@@ -1,11 +1,9 @@
 .invisible {
 	visibility: hidden;
-	z-index: 1;
+	position: absolute;
+	
 }
 
-.your-team-container {
-	z-index: 1;
-}
 
 .pokemon-card-container, .your-team-container  {
 	display: flex;
@@ -14,6 +12,7 @@
 	align-items: center;
 	margin-top: 2em;
 	flex-flow: wrap;
+	
 }
 
 .pokemon-card {
@@ -36,13 +35,14 @@ h2 {
 	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
-.head-pokemon-team {
+.head-pokemon-team, .head-pokemon-reservs {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	color: white;
 	text-align: center;
 	margin: 0.3em;
 	font-size: 28px;
 }
+
 
 .recruit-more-pokemon {
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;

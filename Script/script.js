@@ -1,17 +1,20 @@
-	
+	// import { displayPokemon } from "./utils.js";
 	const main = document.querySelector('main')
 	const pokemonButton = document.querySelector('#pokemon-btn') 
 	const teamButton = document.querySelector('#team-btn')
 	const input = document.querySelector('#pokemon-search')
-	const searchButton = document.querySelector('#search-btn')
 	const pokemonCardContainer = document.querySelector('.pokemon-card-container')
 	const yourTeamContainer = document.querySelector('.your-team-container')
+	const yourReservesContainer = document.querySelector('.your-reserves-container')
 	let recruitedPokemon = [];
-	
+	let pokemonSearchResult = [];
+
 // Pokémons-knappen ska visa pokémons som man kan välja samt att vyn för att söka pokémons ska visas.
 	
 	pokemonButton.addEventListener('click', async () => {
-		yourTeamContainer.parentNode.replaceChild(pokemonCardContainer, yourTeamContainer)
+		pokemonCardContainer.classList.remove('invisible')
+		yourTeamContainer.classList.add('invisible')
+		yourReservesContainer.classList.add('invisible')
 		const urlpokemon = 'https://pokeapi.co/api/v2/pokemon/?limit=20';
 		const response = await fetch(urlpokemon)
 		const pokemonData = await response.json()
@@ -20,39 +23,41 @@
 		console.log(pokemonData.results)
 
 		let pokemonCardContent;
+
 		
 		// loopar igenom en lista om 20 pokemons som visas, och skapar pokémon-cards för varje pokémon
 		for (let i = 0; i < pokemonData.results.length; i++) {
+			
 			
 			// Tar fram bilden från varje pokemons enskilda data
 			const pokemonImageSrc = pokemonData.results[i].url
 			const responseImg = await fetch(pokemonImageSrc);
 			const pokemonImageData = await responseImg.json();
-
 			
-		// Detta är vad som ska finnas i varje pokemon-card sedan ska innehållet bytas ut beroende på vilken pokémon som visas.
-
+			
+			// Detta är vad som ska finnas i varje pokemon-card sedan ska innehållet bytas ut beroende på vilken pokémon som visas.
+			
 			pokemonCardContent = {
 				pokemonCard: document.createElement('div'),
 				pokemonName: document.createElement('h2'),
 				pokemonImage: document.createElement('img'),
 				pokemonRecruitButton: document.createElement('button')
 			}  
-
-		// Här behöver jag skapa en eventlyssnare på knappen "rekrytera till team", Den behöver spara pokémon-kortet i en array som jag sedan kan visa i "Team-vyn" 
-
+			
+			// Här behöver jag skapa en eventlyssnare på knappen "rekrytera till team", Den behöver spara pokémon-kortet i en array som jag sedan kan visa i "Team-vyn" 
+			
 			pokemonCardContent.pokemonRecruitButton.addEventListener('click', () => {
 				console.log('Du la till en pokemon i din lista');
-
-					recruitedPokemon.push ({
-						name: pokemonData.results[i].name,
-						image: pokemonImageData.sprites.front_default
-					});
-					console.log(recruitedPokemon);
-		
-				})
+				
+				recruitedPokemon.push ({
+					name: pokemonData.results[i].name,
+					image: pokemonImageData.sprites.front_default
+				});
+				console.log(recruitedPokemon);
+				
+			})
 			
-		// Skapar klassnamn för styling av pokémon-card
+			// Skapar klassnamn för styling av pokémon-card
 			
 			pokemonCardContent.pokemonCard.className = 'pokemon-card'
 			pokemonCardContent.pokemonName.className = 'pokemon-head'
@@ -63,17 +68,24 @@
 			pokemonCardContent.pokemonImage.src = pokemonImageData.sprites.front_default;
 			pokemonCardContent.pokemonRecruitButton.innerText = 'Rekrytera till ditt team'
 			
-		// Lägger till innehållet i pokemon-card
+			// Lägger till innehållet i pokemon-card
 			pokemonCardContent.pokemonCard.append(pokemonCardContent.pokemonName)
 			pokemonCardContent.pokemonCard.append(pokemonCardContent.pokemonImage)
 			pokemonCardContent.pokemonCard.append(pokemonCardContent.pokemonRecruitButton)
 			
-		// Lägger till pokémon-card i en större container för att lättare positionera ut
+			// Lägger till pokémon-card i en större container för att lättare positionera ut
 			pokemonCardContainer.append(pokemonCardContent.pokemonCard)
-		}
 
-	})
-		
+		};
+			
+	});	
+
+
+
+	
+
+	
+	
 
 // Team-knappen ska byta vy och visa vilka pokémons som är valda, pokémonen ska här visa sina abilities och det ska vara möjligt att kicka sin pokémon från teamet.
 
@@ -81,8 +93,9 @@
 	teamButton.addEventListener('click', () => {
 		
 		console.log(recruitedPokemon);
-			pokemonCardContainer.parentNode.replaceChild(yourTeamContainer, pokemonCardContainer)
-			
+			pokemonCardContainer.classList.add('invisible')
+			yourTeamContainer.classList.remove('invisible')
+			yourReservesContainer.classList.remove('invisible')
 		let recruitMorePokemonContainer = document.createElement('div')
 		let recruitMorePokemonText = document.createElement('p')
 
@@ -92,6 +105,7 @@
 			recruitMorePokemonText.className = 'recruit-more-pokemon'
 			recruitMorePokemonText.innerText = 'Du behöver ha minst tre pokémons i ditt team, rekrytera fler!'
 			recruitMorePokemonContainer.append(recruitMorePokemonText)
+
 
 		} else  {	
 			let recruitMorePokemonContainers = document.querySelectorAll('.recruit-more-pokemon-container')
@@ -170,8 +184,4 @@
 
 		// 1. Jag behöver veta vilken knapp som är i vilket card så att den vet vilket element i arrayen som den ska ta bort.
 		// 2. Sen behöver den välja ut den och ta bort den
-		// 3. Se behöver texten att man har för få pokemons i laget komma upp
-
-
-	
-	
+		// 3. Se behöver texten att man har för få pokemons i laget komma up

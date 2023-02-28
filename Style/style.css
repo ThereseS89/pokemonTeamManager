@@ -89,11 +89,24 @@ input {
 	background-color: #03809B;
 }
 
-input::placeholder {
-	color: white;
-	font-weight: bold;
-	text-align: center;
+label {
+	margin-left: 1em;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
 }
+
+.search-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: .25rem;
+	margin-top: 1em;
+}
+
+.hide {
+	display: none;
+}
+
+
 
 footer {
 	background-color: white;
