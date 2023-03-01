@@ -4,7 +4,6 @@
 	
 }
 
-
 .pokemon-card-container, .your-team-container  {
 	display: flex;
 	flex-direction: column;
@@ -15,6 +14,7 @@
 	
 }
 
+
 .pokemon-card {
 	background-color: #d9d9d9;
 	display: flex;
@@ -24,6 +24,7 @@
 	padding: 1em 3em 1em 3em;
 	border-radius: 10px;
 	margin: 2em;
+	box-shadow: 0px 25px 20px -20px rgba(0, 0, 0, 0.45), 25px 0 20px -20px rgba(0, 0, 0, 0.45);
 
 }
 
@@ -56,4 +57,9 @@ h2 {
 	border-radius: 2em;
 	border: solid 2px white;
 	
+}
+
+.info {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: bold;
 }

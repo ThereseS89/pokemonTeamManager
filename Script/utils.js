@@ -33,7 +33,7 @@
 		console.log(pokemonSearchResult);
 	}) 
 
- function displayPokemon () {
+ export function displayPokemon () {
 	pokemonCardContainer.innerHTML = ''
 	pokemonSearchResult.forEach((pokemonName) => {
 

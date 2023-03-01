@@ -1,20 +1,24 @@
-	// import { displayPokemon } from "./utils.js";
+	 import { displayPokemon } from "./utils.js";
 	const main = document.querySelector('main')
 	const pokemonButton = document.querySelector('#pokemon-btn') 
 	const teamButton = document.querySelector('#team-btn')
 	const input = document.querySelector('#pokemon-search')
+	const searchWrapper = document.querySelector('.search-wrapper')
 	const pokemonCardContainer = document.querySelector('.pokemon-card-container')
 	const yourTeamContainer = document.querySelector('.your-team-container')
 	const yourReservesContainer = document.querySelector('.your-reserves-container')
 	let recruitedPokemon = [];
 	let pokemonSearchResult = [];
-
+	
+	
 // Pokémons-knappen ska visa pokémons som man kan välja samt att vyn för att söka pokémons ska visas.
 	
 	pokemonButton.addEventListener('click', async () => {
+		searchWrapper.classList.remove('invisible')
 		pokemonCardContainer.classList.remove('invisible')
 		yourTeamContainer.classList.add('invisible')
 		yourReservesContainer.classList.add('invisible')
+	
 		const urlpokemon = 'https://pokeapi.co/api/v2/pokemon/?limit=20';
 		const response = await fetch(urlpokemon)
 		const pokemonData = await response.json()
@@ -79,19 +83,14 @@
 		};
 			
 	});	
-
-
-
-	
-
-	
-	
+ 
 
 // Team-knappen ska byta vy och visa vilka pokémons som är valda, pokémonen ska här visa sina abilities och det ska vara möjligt att kicka sin pokémon från teamet.
 
+	let pokemonCardContentTeamMember;
 
 	teamButton.addEventListener('click', () => {
-		
+			searchWrapper.classList.add('invisible')
 		console.log(recruitedPokemon);
 			pokemonCardContainer.classList.add('invisible')
 			yourTeamContainer.classList.remove('invisible')
@@ -172,15 +171,17 @@
 	
 
 			pokemonCardContentTeamMember.pokemonRemoveButton.addEventListener('click', () => {
-				console.log('Kicka från team');
-				
-
-			})
-
+					console.log('Kicka från team');
+						recruitedPokemon.splice(recruitedPokemon, 1)
+					})
+					
 			})
 		}
-			
+	
 	})	
+
+	
+			
 
 		// 1. Jag behöver veta vilken knapp som är i vilket card så att den vet vilket element i arrayen som den ska ta bort.
 		// 2. Sen behöver den välja ut den och ta bort den
