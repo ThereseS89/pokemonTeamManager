@@ -58,9 +58,7 @@ export function displayPokemon() {
       console.log("Du la till en pokemon i din lista");
 
       addToTeam(pokemonName.name, pokemonName.image)
-    
 
-    //   showRecruitedPokemon();
     });
 
     // Skapar klassnamn för styling av pokémon-card

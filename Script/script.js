@@ -9,6 +9,7 @@ const yourTeamContainer = document.querySelector(".your-team-container");
 const yourReservesContainer = document.querySelector(
   ".your-reserves-container"
 );
+const startSection = document.querySelector('.start-section')
 let recruitedPokemon = [];
 let pokemonSearchResult = [];
 
@@ -21,7 +22,9 @@ export function addToTeam (pokemonName, pokemonImage) {
 
 // Pokémons-knappen ska visa pokémons som man kan välja samt att vyn för att söka pokémons ska visas.
 
+
 pokemonButton.addEventListener("click", async () => {
+	startSection.classList.add('invisible')
   searchWrapper.classList.remove("invisible");
   pokemonCardContainer.classList.remove("invisible");
   yourTeamContainer.classList.add("invisible");

@@ -34,6 +34,20 @@ header h1 {
 	
 }
 
+h1 {
+	font-family: 'pokemon';
+	text-align: center;
+	color: red;
+	
+}
+
+.start-section {
+	margin: 1em;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	display: flex;
+	flex-direction: column;
+}
+
 #pokemon-btn {
 	background-color: #FF0202;
 	border-radius: 10px 0px 0px 10px;
