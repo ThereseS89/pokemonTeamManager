@@ -6,7 +6,7 @@ const yourReservesContainer = document.querySelector('.your-reserves-container')
 let recruitedPokemon = [];
 
 export async function getPokemonData() {
-	const urlpokemon = 'https://pokeapi.co/api/v2/pokemon/?limit=20';
+	const urlpokemon = 'https://pokeapi.co/api/v2/pokemon/';
 	const response = await fetch(urlpokemon);
 	const pokemonData = await response.json();
 	

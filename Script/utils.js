@@ -4,11 +4,12 @@ import { addToTeam} from "./script.js";
 const pokemonCardContainer = document.querySelector(".pokemon-card-container");
 const input = document.querySelector("#pokemon-search");
 let pokemonSearchResult = [];
-const url = "https://pokeapi.co/api/v2/pokemon/?limit=20";
+const url = "https://pokeapi.co/api/v2/pokemon/?limit=100";
 const response = await fetch(url);
 const pokemonData = await response.json();
 let searchValue = "";
 const pokemonImageData = {};
+const pokemonAbilitiesData = {};
 
 
 // Detta plockar ut bilden och lägger den i ett objekt så att den inte ska hämtas varje gång appen körs
@@ -17,8 +18,18 @@ await Promise.all(
     const response = await fetch(pokemon.url);
     const data = await response.json();
     pokemonImageData[pokemon.name] = data.sprites.front_default;
+
   })
 );
+
+await Promise.all(
+	pokemonData.results.map(async (pokemon) => {
+	  const response = await fetch(pokemon.url);
+	  const data = await response.json();
+	  pokemonAbilitiesData[pokemon.abilities] = data.abilities.map((ability) => ability.ability.name);
+	})
+	
+  );console.log(pokemonAbilitiesData);
 
 input.addEventListener("keyup", (event) => {
   searchValue = event.target.value.toLowerCase();
@@ -30,6 +41,8 @@ input.addEventListener("keyup", (event) => {
       pokemonSearchResult.push({
         name: pokemon.name,
         image: pokemonImageData[pokemon.name],
+		abilities: pokemonAbilitiesData[pokemon.name]
+		
       });
     }
   });
@@ -41,15 +54,16 @@ export function displayPokemon() {
   pokemonCardContainer.innerHTML = "";
   pokemonSearchResult.forEach((pokemonName) => {
     // Tar fram bilden från varje pokemons enskilda data
-    const pokemonImageSrc = pokemonSearchResult.find(
-      (pokemon) => pokemon.name === pokemonName
-    )?.image;
+    // const pokemonImageSrc = pokemonSearchResult.find(
+    //   (pokemon) => pokemon.name === pokemonName
+    // )?.image;
 
     let pokemonCardContent = {
       pokemonCard: document.createElement("div"),
       pokemonName: document.createElement("h2"),
       pokemonImage: document.createElement("img"),
       pokemonRecruitButton: document.createElement("button"),
+	  
     };
 
     // Här behöver jag skapa en eventlyssnare på knappen "rekrytera till team", Den behöver spara pokémon-kortet i en array som jag sedan kan visa i "Team-vyn"
@@ -57,7 +71,7 @@ export function displayPokemon() {
     pokemonCardContent.pokemonRecruitButton.addEventListener("click", () => {
       console.log("Du la till en pokemon i din lista");
 
-      addToTeam(pokemonName.name, pokemonName.image)
+      addToTeam(pokemonName.name, pokemonName.image, pokemonName.abilities)
 
     });
 
@@ -67,7 +81,9 @@ export function displayPokemon() {
     pokemonCardContent.pokemonName.className = "pokemon-head";
     pokemonCardContent.pokemonRecruitButton.className = "pokemon-recruit-btn";
     pokemonCardContent.pokemonImage.className = "pokemon-img";
+	
 
+	
     pokemonCardContent.pokemonName.innerText = pokemonName.name;
     pokemonCardContent.pokemonImage.src = pokemonName.image;
     pokemonCardContent.pokemonRecruitButton.innerText =

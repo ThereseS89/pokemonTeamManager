@@ -8,6 +8,7 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 	justify-content: center;
+	align-items: center;
 	gap: 1em;
 	padding: 1em;
 
@@ -23,6 +24,7 @@
 	padding: 1em 3em 1em 3em;
 	border-radius: 10px;
 	border: 2px solid white;
+
 	box-shadow: 0px 25px 20px -20px rgba(0, 0, 0, 0.45), 25px 0 20px -20px rgba(0, 0, 0, 0.45);
 
 }
@@ -32,22 +34,26 @@ h2 {
 	text-transform: uppercase;
 	text-align: center;
 	margin-top: 1em;
-	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+	font-family: 'poppins';
 }
 
-.head-pokemon-team, .head-pokemon-reservs {
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.head-pokemon-team  {
+	font-family: 'poppins';
 	color: white;
 	text-align: center;
-	grid-row: 1;
+	
 	margin: 0.3em;
 	font-size: 28px;
 	
 }
-
+.head-pokemon-reservs {
+	font-family: 'poppins';
+	color: white;
+	text-align: center;
+}
 
 .recruit-more-pokemon {
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-family: 'poppins';
 	font-size: 18px;
 }
 
@@ -60,10 +66,31 @@ h2 {
 	
 }
 
+.pokemon-recruit-btn {
+	transition: all 0.4s;
+	border-radius: 2em;
+}
+
+.pokemon-recruit-btn:hover {
+	cursor: pointer;
+	transform: scale(1.3);
+}
+
 .info {
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: 'poppins';
 	font-weight: bold;
-	color: white;
-	grid-column-start: 1;
-	grid-column-end: auto;
+	color: #444AD2;
+	font-size: 20px;
+	text-align: center;
+	margin: 1em;
+}
+
+.your-pokemon-name {
+	font-family: 'poppins';
+}
+
+.pokemon-output-name {
+	font-family: 'poppins';
+	text-align: center;
+	font-size: 18px;
 }
