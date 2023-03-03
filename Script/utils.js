@@ -4,12 +4,11 @@ import { addToTeam} from "./script.js";
 const pokemonCardContainer = document.querySelector(".pokemon-card-container");
 const input = document.querySelector("#pokemon-search");
 let pokemonSearchResult = [];
-const url = "https://pokeapi.co/api/v2/pokemon/?limit=100";
+const url = "https://pokeapi.co/api/v2/pokemon/?limit=1279";
 const response = await fetch(url);
 const pokemonData = await response.json();
 let searchValue = "";
 const pokemonImageData = {};
-const pokemonAbilitiesData = {};
 
 
 // Detta plockar ut bilden och lägger den i ett objekt så att den inte ska hämtas varje gång appen körs
@@ -22,14 +21,6 @@ await Promise.all(
   })
 );
 
-await Promise.all(
-	pokemonData.results.map(async (pokemon) => {
-	  const response = await fetch(pokemon.url);
-	  const data = await response.json();
-	  pokemonAbilitiesData[pokemon.abilities] = data.abilities.map((ability) => ability.ability.name);
-	})
-	
-  );console.log(pokemonAbilitiesData);
 
 input.addEventListener("keyup", (event) => {
   searchValue = event.target.value.toLowerCase();
@@ -37,11 +28,11 @@ input.addEventListener("keyup", (event) => {
 
   pokemonSearchResult = [];
   pokemonData.results.forEach((pokemon) => {
-    if (pokemon.name.includes(searchValue)) {
+    if (pokemon.name.includes(searchValue) && !pokemon.name.includes('-')) {
       pokemonSearchResult.push({
         name: pokemon.name,
         image: pokemonImageData[pokemon.name],
-		abilities: pokemonAbilitiesData[pokemon.name]
+		
 		
       });
     }
@@ -53,10 +44,7 @@ input.addEventListener("keyup", (event) => {
 export function displayPokemon() {
   pokemonCardContainer.innerHTML = "";
   pokemonSearchResult.forEach((pokemonName) => {
-    // Tar fram bilden från varje pokemons enskilda data
-    // const pokemonImageSrc = pokemonSearchResult.find(
-    //   (pokemon) => pokemon.name === pokemonName
-    // )?.image;
+   
 
     let pokemonCardContent = {
       pokemonCard: document.createElement("div"),
@@ -71,7 +59,7 @@ export function displayPokemon() {
     pokemonCardContent.pokemonRecruitButton.addEventListener("click", () => {
       console.log("Du la till en pokemon i din lista");
 
-      addToTeam(pokemonName.name, pokemonName.image, pokemonName.abilities)
+      addToTeam(pokemonName.name, pokemonName.image)
 
     });
 

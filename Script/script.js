@@ -11,7 +11,6 @@ let recruitMorePokemonContainer = document.createElement("div");
 
 const startSection = document.querySelector('.start-section')
 let recruitedPokemon = [];
-const pokemonAbilitiesData = {};
 const infoText = document.querySelector('.info')
 
 
@@ -27,19 +26,11 @@ export function addToTeam (pokemonName, pokemonImage,) {
 }
 
 // Pokémons-knappen ska visa pokémons som man kan välja samt att vyn för att söka pokémons ska visas.
+// Begränsar API så att den inte gör kort för alla 1279 pokemon. I sökfunktionen kan man söka i hela listan men den visar inte pokemon som innehåller -.
 
-const urlpokemon = "https://pokeapi.co/api/v2/pokemon/?limit=100";
+const urlpokemon = "https://pokeapi.co/api/v2/pokemon/?limit=50";
   const response = await fetch(urlpokemon);
   const pokemonData = await response.json();
-
-await Promise.all(
-	pokemonData.results.map(async (pokemon) => {
-	  const response = await fetch(pokemon.url);
-	  const data = await response.json();
-	  pokemonAbilitiesData[pokemon.abilities] = data.abilities.map((ability) => ability.ability.name);
-
-	console.log(pokemonAbilitiesData);
-	}));
 	
 	
 pokemonButton.addEventListener("click", async () => {
@@ -49,8 +40,6 @@ pokemonButton.addEventListener("click", async () => {
   yourTeamContainer.classList.add("invisible");
   recruitMorePokemonContainer.classList.add('invisible')
   infoText.classList.remove('invisible')
-  
-
   
 
   console.log("Du klickade på knappen");
@@ -78,6 +67,7 @@ pokemonButton.addEventListener("click", async () => {
 
     pokemonCardContent.pokemonRecruitButton.addEventListener("click", () => {
       console.log("Du la till en pokemon i din lista");
+	  
 
 	  addToTeam(pokemonData.results[i].name, pokemonImageData.sprites.front_default)
     });
@@ -167,7 +157,7 @@ export function showRecruitedPokemon() {
         pokemonInputName: document.createElement("input"),
         pokemonOutputName: document.createElement("p"),
         pokemonRemoveButton: document.createElement("button"),
-		pokemonAbilities: document.createElement("p")
+		
       };
 
       let pokemonOutputName =
@@ -185,7 +175,7 @@ export function showRecruitedPokemon() {
         "pokemon-input-name";
       pokemonCardContentTeamMember.pokemonOutputName.className =
         "pokemon-output-name";
-		pokemonCardContentTeamMember.pokemonAbilities.className = "pokemon-abilities"
+		
 
       // Innehåll:
       pokemonCardContentTeamMember.pokemonRemoveButton.innerText =
@@ -194,7 +184,6 @@ export function showRecruitedPokemon() {
       pokemonCardContentTeamMember.pokemonName.innerText =
         pokemon.name;
       pokemonCardContentTeamMember.pokemonImage.src = pokemon.image;
-	  pokemonCardContentTeamMember.pokemonAbilities.innerText = 'Abilities: ' , pokemonAbilitiesData[pokemon.abilities];
       pokemonCardContentTeamMember.pokemonYourName.innerText =
         "Välj ett namn till din pokémon: ";
 
@@ -234,9 +223,6 @@ export function showRecruitedPokemon() {
         pokemonCardContentTeamMember.pokemonImage
       );
 
-	  pokemonCardContentTeamMember.pokemonCard.append(
-        pokemonCardContentTeamMember.pokemonAbilities
-      );
       pokemonCardContentTeamMember.pokemonCard.append(
         pokemonCardContentTeamMember.pokemonRemoveButton
       );
@@ -271,6 +257,4 @@ export function showRecruitedPokemon() {
   }
 }
 
-// 1. Jag behöver veta vilken knapp som är i vilket card så att den vet vilket element i arrayen som den ska ta bort.
-// 2. Sen behöver den välja ut den och ta bort den
-// 3. Se behöver texten att man har för få pokemons i laget komma up
+
