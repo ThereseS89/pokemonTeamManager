@@ -3,10 +3,6 @@
 	src: url(/Fonts/Pokemon\ Solid.ttf)
 }
 
-@font-face {
-	font-family: poppins;
-	src: url(/Fonts/Poppins-Light.ttf);
-}
 
 body {
 	background: rgb(117,255,131);
