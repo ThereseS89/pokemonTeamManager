@@ -34,7 +34,7 @@ h2 {
 	text-transform: uppercase;
 	text-align: center;
 	margin-top: 1em;
-	font-family: 'poppins';
+	font-family: 'Poppins', sans-serif;
 }
 
 .head-pokemon-team  {
@@ -81,7 +81,7 @@ h2 {
 }
 
 .info {
-	font-family: 'poppins';
+	font-family: 'Poppins', sans-serif;
 	font-weight: bold;
 	color: #444AD2;
 	font-size: 20px;
@@ -90,11 +90,11 @@ h2 {
 }
 
 .your-pokemon-name {
-	font-family: 'poppins';
+	font-family: 'Poppins', sans-serif;
 }
 
 .pokemon-output-name {
-	font-family: 'poppins';
+	font-family: 'Poppins', sans-serif;
 	text-align: center;
 	font-size: 18px;
 }
